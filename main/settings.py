@@ -15,6 +15,7 @@ ALLOWED_HOSTS = ['*']
 
 APPS = [
     'users',
+    'mango',
 ]
 
 # Installed APPS
@@ -31,6 +32,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'drf_yasg',
     'rest_framework_simplejwt',
+    'django_filters',
 ] + APPS
 
 MIDDLEWARE = [
@@ -50,8 +52,14 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
     ],
     'DEFAULT_FILTER_BACKENDS': [
-        'django_filters.rest_framework.DjangoFilterBackend'
+        'django_filters.rest_framework.DjangoFilterBackend',
     ],
+
+    'DEFAULT_PARSER_CLASSES': [
+        'rest_framework.parsers.JSONParser',
+    ],
+
+
 }
 
 ROOT_URLCONF = 'main.urls'
