@@ -1,5 +1,5 @@
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import generics, filters
+from rest_framework import generics, filters, viewsets, permissions
 from rest_framework.generics import ListAPIView, CreateAPIView
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import IsAuthenticated
@@ -40,30 +40,39 @@ class ReviewCreateAPIView(CreateAPIView):
         return Response({"post": serializer.data})
 
 
+class ReviewCreateViewSet(viewsets.ModelViewSet):
+    queryset = Review.objects.all()
+    serializer_class = ReviewSerializer()
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+
 class CardAPIView(generics.ListAPIView):
+    queryset = Card.objects.all()
+    serializer_class = CardSerializer
     filter_backends = [filters.SearchFilter]
     search_fields = ['title', 'year']
+    pagination_class = CardPagination
     # search_fields = ('title',)
 
-
-
-    def filter_queryset(self, queryset):
-        for backend in list(self.filter_backends):
-            queryset = backend().filter_queryset(self.request, queryset, self)
-        return queryset
-
-    def get_queryset(self):
-        return Card.objects.all()
-
-    def get(self, request):
-        filtered_queryset = self.filter_queryset(self.get_queryset())
-        paginator = CardPagination()
-        paginator.page_size = 12
-        result_page = paginator.paginate_queryset(filtered_queryset, request)
-        serializer = CardSerializer(result_page, many=True)
-        return paginator.get_paginated_response({
-            "card": serializer.data
-        })
+    #
+    #
+    # def filter_queryset(self, queryset):
+    #     for backend in list(self.filter_backends):
+    #         queryset = backend().filter_queryset(self.request, queryset, self)
+    #     return queryset
+    #
+    # def get_queryset(self):
+    #     return Card.objects.all()
+    #
+    # def get(self, request):
+    #     filtered_queryset = self.filter_queryset(self.get_queryset())
+    #     paginator = CardPagination()
+    #     paginator.page_size = 12
+    #     result_page = paginator.paginate_queryset(filtered_queryset, request)
+    #     serializer = CardSerializer(result_page, many=True)
+    #     return paginator.get_paginated_response({
+    #         "card": serializer.data
+    #     })
 
 
 class CardDetailAPIView(APIView):

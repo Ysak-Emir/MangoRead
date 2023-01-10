@@ -68,7 +68,7 @@ class LoginUserSerializer(serializers.Serializer):
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = "profile_picture username nickname".split()
+        fields = "__all__"
 
 
 class ChangePasswordSerializer(serializers.Serializer):

@@ -11,7 +11,7 @@ from rest_framework.views import APIView
 from . import serializers
 
 from .models import User
-from .permissions import IsAdminOrReadOnly
+from .permissions import IsAdminOrReadOnly, IsOwnerOrReadOnly
 from .serializers import UserRegisterSerializer, ProfileSerializer, ChangePasswordSerializer
 
 
@@ -59,16 +59,16 @@ class UserLoginView(generics.GenericAPIView):
 # ------------
 
 
-class ProfileAPIViewList(generics.ListCreateAPIView):
+class ProfileAPIViewList(generics.ListAPIView):
     queryset = User.objects.all()
     serializer_class = ProfileSerializer
     permission_classes = (IsAuthenticatedOrReadOnly,)
 
 
-class ProfileAPIViewUpdate(generics.RetrieveUpdateAPIView):
-    queryset = User.objects.all()
-    serializer_class = ProfileSerializer
-    permission_classes = (IsAuthenticated,)
+# class ProfileAPIViewUpdate(generics.RetrieveUpdateAPIView):
+#     queryset = User.objects.all()
+#     serializer_class = ProfileSerializer
+#     permission_classes = (IsAuthenticated,)
 
 
 class ProfileAPIViewDelete(generics.RetrieveDestroyAPIView):
@@ -78,12 +78,12 @@ class ProfileAPIViewDelete(generics.RetrieveDestroyAPIView):
 
 
 
-class ProfileAPI(viewsets.ViewSet):
+class ProfileAPI(APIView):
     def get(self, request, *args, **kwargs):
         user = get_object_or_404(User, pk=kwargs['user_id'])
-        profile_serializer = ProfileSerializer(user.profile)
-        return Response({"message": "ok"},
-                        {profile_serializer.data})
+        profile_serializer = ProfileSerializer(user)
+        return Response(profile_serializer.data)
+
 
 
 class ChangePasswordView(CreateAPIView):

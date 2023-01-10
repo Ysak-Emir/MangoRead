@@ -7,7 +7,7 @@ class Genres(models.Model):
     genres_title = models.CharField(max_length=100, blank=False, verbose_name="Жанр")
 
     class Meta:
-        verbose_name = "Жанры"
+        verbose_name = "Жанр"
         verbose_name_plural = "Жанры"
 
     def __str__(self):
@@ -20,7 +20,7 @@ class GenreType(models.Model):
 
     class Meta:
         verbose_name = "Тип жанра"
-        verbose_name_plural = "Тип жанра"
+        verbose_name_plural = "Тип жанр"
 
     def __str__(self):
         return self.type_title
@@ -39,7 +39,7 @@ class Card(models.Model):
 
     class Meta:
         verbose_name = "Карточка"
-        verbose_name_plural = "Карточка"
+        verbose_name_plural = "Карточки"
         ordering = ['title', 'time_create']
 
     def __str__(self):
@@ -53,8 +53,8 @@ class Review(models.Model): #Отзыв
     mango = models.ForeignKey(Card, on_delete=models.CASCADE, verbose_name="Манго")
 
     class Meta:
+        verbose_name = "Отзыв"
         verbose_name_plural = "Отзывы"
-        verbose_name = "Отзывы"
         ordering = ['time_create', 'user']
 
     def __str__(self):

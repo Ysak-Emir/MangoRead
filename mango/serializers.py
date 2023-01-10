@@ -40,11 +40,16 @@ class ReviewSerializer(serializers.ModelSerializer):
         read_only_fields = ['time_create']
 
 
+# class ReviewCreateSerializer(serializers.Serializer):
+#     user = serializers.CharField(max_length=100)
+#     text = serializers.CharField(max_length=2000, required=True)
+#     mango = serializers.CharField(max_length=100)
+#
+#     def create(self, validated_data):
+#         return Review.objects.create(**validated_data)
+
+
 class ReviewCreateSerializer(serializers.Serializer):
-    # user =
-    text = serializers.CharField(max_length=200, required=True)
-
-    # mango = serializers.For
-
-    def create(self, validated_data):
-        return Review.objects.create(**validated_data)
+    class Meta:
+        model = Review
+        fields = '__all__'

@@ -1,5 +1,6 @@
 from pathlib import Path
 from datetime import timedelta
+from .jazzmin import JAZZMIN_SETTINGS
 
 #==========================
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,6 +22,7 @@ APPS = [
 # Installed APPS
 
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -168,3 +170,8 @@ SIMPLE_JWT = {
     'SLIDING_TOKEN_LIFETIME': timedelta(minutes=5),
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
 }
+
+
+# JAZZMIN SETTINGS
+
+JAZZMIN_SETTINGS = JAZZMIN_SETTINGS

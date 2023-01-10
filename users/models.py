@@ -29,10 +29,10 @@ class User(AbstractBaseUser, PermissionsMixin):
 
 
 # class Profile(models.Model):
-#     # username = models.CharField(max_length=50, unique=True, blank=False, null=True)
-#     profile_picture = models.ImageField(upload_to="user_data/profile_picture", null=True, blank=True)
-#
-#     user = models.ForeignKey(User, on_delete=models.CASCADE)
+#     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
+
+    # def __str__(self):
+    #     return self.user
 
 
 
