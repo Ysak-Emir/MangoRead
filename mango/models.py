@@ -47,6 +47,8 @@ class Card(models.Model):
 
 
 class Review(models.Model): #Отзыв
+    # profile_picture = models.ImageField(upload_to="review_data/profile_picture", null=True, blank=False,
+    #                                     verbose_name="Картинка")
     text = models.TextField(null=True, blank=False, verbose_name="Текст")
     time_create = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Пользователь")
@@ -59,3 +61,4 @@ class Review(models.Model): #Отзыв
 
     def __str__(self):
         return self.user
+
