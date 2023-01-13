@@ -1,16 +1,11 @@
+import os
+import sys
 from pathlib import Path
-from datetime import timedelta
 from .jazzmin import JAZZMIN_SETTINGS
 
-#==========================
 BASE_DIR = Path(__file__).resolve().parent.parent
+SECRET_KEY = os.environ.get('SECRET_KEY')
 AUTH_USER_MODEL = "users.User"
-SECRET_KEY = 'django-insecure-x(99#lbhf03xq6-f_b)nu2p^5$wfe(d!ax=5x-&7=8#g43zz8('
-DEBUG = True
-ALLOWED_HOSTS = ['*']
-#==========================
-
-
 # APPLICATIONS!!!
 # Existing applications
 
@@ -22,20 +17,20 @@ APPS = [
 # Installed APPS
 
 INSTALLED_APPS = [
-    'jazzmin',
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'main',
-    'django',
-    'rest_framework',
-    'drf_yasg',
-    'rest_framework_simplejwt',
-    'django_filters',
-] + APPS
+                     'jazzmin',
+                     'django.contrib.admin',
+                     'django.contrib.auth',
+                     'django.contrib.contenttypes',
+                     'django.contrib.sessions',
+                     'django.contrib.messages',
+                     'django.contrib.staticfiles',
+                     'main',
+                     'django',
+                     'rest_framework',
+                     'drf_yasg',
+                     'rest_framework_simplejwt',
+                     'django_filters',
+                 ] + APPS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -61,7 +56,6 @@ REST_FRAMEWORK = {
         'rest_framework.parsers.JSONParser',
     ],
 
-
 }
 
 ROOT_URLCONF = 'main.urls'
@@ -84,17 +78,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'main.wsgi.application'
 
+# JAZZMIN SETTINGS
 
-# Database
-# https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
-
+JAZZMIN_SETTINGS = JAZZMIN_SETTINGS
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -114,7 +100,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
@@ -126,7 +111,6 @@ USE_I18N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
@@ -136,42 +120,3 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-# SIMPLE_JWT SETTINGS!!!
-
-SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
-    'ROTATE_REFRESH_TOKENS': False,
-    'BLACKLIST_AFTER_ROTATION': False,
-    'UPDATE_LAST_LOGIN': False,
-
-    'ALGORITHM': 'HS256',
-    'SIGNING_KEY': SECRET_KEY,
-    'VERIFYING_KEY': None,
-    'AUDIENCE': None,
-    'ISSUER': None,
-    'JWK_URL': None,
-    'LEEWAY': 0,
-
-    'AUTH_HEADER_TYPES': ('Bearer',),
-    'AUTH_HEADER_NAME': 'HTTP_AUTHORIZATION',
-    'USER_ID_FIELD': 'id',
-    'USER_ID_CLAIM': 'user_id',
-    'USER_AUTHENTICATION_RULE': 'rest_framework_simplejwt.authentication.default_user_authentication_rule',
-
-    'AUTH_TOKEN_CLASSES': ('rest_framework_simplejwt.tokens.AccessToken',),
-    'TOKEN_TYPE_CLAIM': 'token_type',
-    'TOKEN_USER_CLASS': 'rest_framework_simplejwt.models.TokenUser',
-
-    'JTI_CLAIM': 'jti',
-
-    'SLIDING_TOKEN_REFRESH_EXP_CLAIM': 'refresh_exp',
-    'SLIDING_TOKEN_LIFETIME': timedelta(minutes=5),
-    'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
-}
-
-
-# JAZZMIN SETTINGS
-
-JAZZMIN_SETTINGS = JAZZMIN_SETTINGS
