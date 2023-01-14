@@ -17,20 +17,20 @@ APPS = [
 # Installed APPS
 
 INSTALLED_APPS = [
-                     'jazzmin',
-                     'django.contrib.admin',
-                     'django.contrib.auth',
-                     'django.contrib.contenttypes',
-                     'django.contrib.sessions',
-                     'django.contrib.messages',
-                     'django.contrib.staticfiles',
-                     'main',
-                     'django',
-                     'rest_framework',
-                     'drf_yasg',
-                     'rest_framework_simplejwt',
-                     'django_filters',
-                 ] + APPS
+    'jazzmin',
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'main',
+    'django',
+    'rest_framework',
+    'drf_yasg',
+    'rest_framework_simplejwt',
+    'django_filters',
+] + APPS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

@@ -1,11 +1,10 @@
 from .base import *
 import os
 
-ENV = os.getenv('.env', 'local')
 
-if os.environ.get("ENV") == 'Production':
+if os.environ.get("DJANGO_DEVELOPMENT") == 'production':
     from .production import *
-elif os.environ.get("ENV") == 'local':
+elif os.environ.get("DJANGO_DEVELOPMENT") == 'local':
     from .local import *
 else:
     from .local import *
