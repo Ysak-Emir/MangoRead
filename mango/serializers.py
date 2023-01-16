@@ -7,6 +7,14 @@ from users.models import User
 
 
 class CardSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Card
+        fields = "id profile_picture title year description".split()
+
+
+
+class CardDetailSerializer(serializers.ModelSerializer):
     genre = serializers.SerializerMethodField()
     genres_type = serializers.SerializerMethodField()
 
@@ -19,12 +27,6 @@ class CardSerializer(serializers.ModelSerializer):
 
     def get_genres_type(self, instance):
         return instance.genres_type.type_title
-
-
-class CardDetailSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Card
-        fields = "id profile_picture title year description time_create".split()
 
 
 class UserSerializer(serializers.ModelSerializer):
